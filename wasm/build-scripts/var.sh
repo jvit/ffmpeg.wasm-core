@@ -10,7 +10,7 @@ export PATH=$PATH:$EMSDK/upstream/bin
 # if yes, we are building a single thread version of
 # ffmpeg.wasm-core, which is slow but compatible with
 # most browsers as there is no SharedArrayBuffer.
-FFMPEG_ST=${FFMPEG_ST:-no}
+FFMPEG_ST=yes
 
 # Root directory
 ROOT_DIR=$PWD
@@ -24,9 +24,8 @@ EM_PKG_CONFIG_PATH=$BUILD_DIR/lib/pkgconfig
 # Toolchain file path for cmake
 TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
 
-# Flags for code optimization, focus on speed instead
-# of size
-OPTIM_FLAGS="-O3"
+# Flags for code optimization
+OPTIM_FLAGS="-Os -sWASM_BIGINT -flto"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # Use closure complier only in linux environment
