@@ -5,23 +5,19 @@ source $(dirname $0)/var.sh
 
 FLAGS=(
   "${FFMPEG_CONFIG_FLAGS_BASE[@]}"
-  --enable-gpl            # required by x264
-  --enable-nonfree        # required by fdk-aac
-  --enable-zlib           # enable zlib
-  --enable-libx264        # enable x264
-  --enable-libx265        # enable x265
-  --enable-libvpx         # enable libvpx / webm
-  --enable-libwavpack     # enable libwavpack
-  --enable-libmp3lame     # enable libmp3lame
-  --enable-libfdk-aac     # enable libfdk-aac
-  --enable-libtheora      # enable libtheora
-  --enable-libvorbis      # enable libvorbis
-  --enable-libfreetype    # enable freetype
-  --enable-libopus        # enable opus
-  --enable-libwebp        # enable libwebp
-  --enable-libass         # enable libass
-  --enable-libfribidi     # enable libfribidi
-  # --enable-libaom         # enable libaom
+    --disable-everything
+    --disable-autodetect
+    --disable-network
+    --enable-small
+    --enable-decoder=pcm_f32le
+    --enable-demuxer=pcm_f32le
+    --enable-muxer=wav,pcm_*,flac,mp4,mp3,opus,ogg
+    --enable-encoder=pcm_*,flac,aac,libmp3lame,libopus,libvorbis
+    --enable-protocol=file
+    --enable-libmp3lame
+    --enable-libopus
+    --enable-libvorbis
+    --enable-filter=aresample
 )
 echo "FFMPEG_CONFIG_FLAGS=${FLAGS[@]}"
 emconfigure ./configure "${FLAGS[@]}"
