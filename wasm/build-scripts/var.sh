@@ -25,7 +25,7 @@ EM_PKG_CONFIG_PATH=$BUILD_DIR/lib/pkgconfig
 TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
 
 # Flags for code optimization
-OPTIM_FLAGS="-Os -sWASM_BIGINT -flto"
+OPTIM_FLAGS="-O2"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # Use closure complier only in linux environment
